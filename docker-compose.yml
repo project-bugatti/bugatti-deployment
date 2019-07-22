@@ -1,7 +1,7 @@
 version: "3"
 services:
   bugatti:
-    image: bugatti:0.1-RELEASE
+    image: gcmedia/bugatti:0.1-RELEASE
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /config/google_stackdriver_creds.json
       spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
