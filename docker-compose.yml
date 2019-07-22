@@ -4,11 +4,11 @@ services:
     image: gcmedia/bugatti:0.1-RELEASE
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /config/google_stackdriver_creds.json
-      spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+      spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: 'true'
       spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-      spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+      spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: 'false'
       aws.client_region: us-east-1
-      s3_media_bucket_name: media.thegc
+      aws.s3_media_bucket_name: media.thegc
     ports:
       - "8080:8080"
     volumes:
