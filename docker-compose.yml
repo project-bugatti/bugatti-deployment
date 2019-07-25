@@ -2,15 +2,24 @@ version: "3"
 services:
   bugatti:
     image: gcmedia/bugatti:0.1-RELEASE
+    networks:
+      - gcmedia-net
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /config/google_stackdriver_creds.json
-      spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: 'true'
-      spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-      spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: 'false'
       aws.client_region: us-east-1
-      aws.s3_media_bucket_name: media.thegc
     ports:
       - "8080:8080"
+    labels:
+      - "traefik.backend=bugatti"
+      - "traefik.docker.network=gcmedia-net"
+      - "traefik.enable=true"
+      - "traefik.protocol=http"
+      - "traefik.frontend.rule=Host:api.thegc.website"
+      - "traefik.port=8080"
     volumes:
       - ./logs:/logs
-      - ./config:/config
+      - ./config/google_stackdriver_creds.json:/config/google_stackdriver_creds.json
+      - ./config/application.yml:/maven/application.yml
+networks:
+  gcmedia-net:
+    external: true
