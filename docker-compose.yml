@@ -6,7 +6,6 @@ services:
       - gcmedia-net
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /config/google_stackdriver_creds.json
-      aws.client_region: us-east-1
     ports:
       - "8080:8080"
     labels:
@@ -18,8 +17,7 @@ services:
       - "traefik.port=8080"
     volumes:
       - ./logs:/logs
-      - ./config/google_stackdriver_creds.json:/config/google_stackdriver_creds.json
-      - ./config/application.yml:/maven/application.yml
+      - ./config:/config
 networks:
   gcmedia-net:
     external: true
